@@ -1,0 +1,165 @@
+#include <iostream>
+#include <string>
+class NamiasClass{
+	public:
+		void display_menu(const std::string &manufacturer,
+    		              const std::string names[],
+	    		          const int prices[],
+	        		      const size_t numCars ) {
+		    std::cout << manufacturer << " Cars" << std::endl;
+    		for (size_t i = 0 ; i < numCars ; i++) {
+    			std::cout << i + 1
+        			      << ". "
+            			  << names[i]
+		    	    	  << " for "
+	    	    		  << prices[i]
+	        			  << " pesos"
+						  << std::endl;
+  			}
+		}
+		void display_color(const std::string color_index[],
+						   const size_t numColors) {
+			for (size_t a = 0; a < numColors; a++) {
+				std::cout << a + 1
+						  << ". "
+						  << color_index[a]
+						  << std::endl;
+			}
+			std::cout << "Please select the Number of Color: ";
+
+		}
+};
+
+int main() 
+{
+	char order_more,
+    	 order_confirmation;
+  	int Payment, 
+    	Value,
+	  	Change,
+	  	Cars,
+	  	Color,
+	    toyota_car_prices[] = {
+		2042000, 
+		1595000, 
+		1056000, 
+		700000, 
+		1065000, 
+		1650000, 
+		2083000, 
+		2414000, 
+		4950000, 
+		2308000, 
+		2508000, 
+		1115000, 
+		1249000, 
+		1678000, 
+		1296000, 
+		1038000, 
+		2298000
+	  	};
+    std::string toyota_car_names[] = {
+	    "Camry",
+	    "Corolla Altis",
+	    "Vios",
+	    "Wigo",
+	    "Yaris",
+	    "Corolla Cross",
+	    "FJ Cruiser",
+	    "Fortuner",
+	 	"Land Cruiser",
+	  	"Accord",
+	  	"Accord Hybrid",
+	 	"Civic",
+	 	"Clarity",
+	 	"CR-V",
+	  	"HR-V",
+	  	"Insight",
+	  	"Odyssey"
+	},
+    color_index[] = {
+  	  	"Black",
+	  	"Blue",
+	  	"Gray",
+	  	"Green",
+	  	"Red",
+	  	"Cyan",
+	  	"Yellow",
+	  	"Voilet",
+	  	"Pink",
+		"White",
+		"Lime", 	
+	};
+do{
+	std::cout << "Welcome to Toyota Car Dealership\n" 
+		      << "Here's the list of Cars: \n " ;
+	NamiasClass NamiasObject;
+	NamiasObject.display_menu("Toyota",toyota_car_names,toyota_car_prices,17);
+	std::cout << "Input Number According to the type of Car: ";
+	std::cin >> Cars;
+	std::cout << "You selected "
+		      << toyota_car_names[Cars-1]  
+        	  << " for "
+        	  << toyota_car_prices[Cars-1]
+        	  << " pesos\n";
+	std::cout << "To be Comformed Type Y Yes, if type N if No: ";
+	std::cin >> order_confirmation;
+	if (order_confirmation == 'y' || order_confirmation == 'Y') {
+    	std::cout << "You Ordered "
+	        	  << toyota_car_names[Cars-1]
+	          	  << std::endl;
+		std::cout << "What Color of " 
+	              << toyota_car_names[Cars-1] 
+		   		  << " do you want?\n";
+		NamiasClass NamiasObject2;
+		NamiasObject2.display_color(color_index, 11);
+       	std::cin >> Color;
+      	if (Color < 1 || Color > 11) {
+     		std::cout << "You pick the Wrong number.\n";
+   			break;
+	  	}
+   	  	else if (Color >= 1 || Color <= 11) {
+			std::cout << "You pick color " 
+					  << color_index[Color - 1]
+					  << std::endl;
+		}
+	 	Value = toyota_car_prices[Cars - 1];
+		std::cout << "Total Amount: " << Value << "\n";
+		std::cout << "Enter The Amount of Payment\n";
+	   	std::cin >> Payment;
+		Change = Payment - Value;
+		if (Change >= 1) {
+			std::cout << "Change: " << Change << "\n ";
+		}
+		else if (Change == 0) {
+		    std::cout << "You paid the exact amount of money needed.\n";
+		}
+		else if (Change <= -1) {
+			std::cout << "You don't have enough money.\n";
+			break;
+		}
+		else {
+			std::cout << "It seems like there's an error on the system.\n";
+			break;
+		}
+		std::cout << "************************************************\n"
+	              << "              Thank for your purchase           \n"
+          	      << "          We love to hear your feedback         \n" 
+		          << "              Call: (02) 8-361-8794             \n" 
+	  	          << "               Globe: 09272533969               \n"
+       	          << "            Email: JKRBN99@gmail.com            \n"
+       	          << "              Website: Toyota.com.ph            \n"
+       	          << "************************************************\n";
+		std::cout << "Do you want to order more? type Y if yes and type N if no: ";
+	    std::cin >> order_more;
+	    if (order_more == 'n' || order_more == 'N') {
+	    	break;
+		}
+	}
+    else if (order_confirmation == 'n' || order_confirmation == 'N') {
+	std::cout << "You Canceled the order.\n";
+	}
+}
+  	while(order_more == 'y' || order_more == 'Y');
+    return 0;
+}
